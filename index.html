@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cửa hàng sản phẩm - Trang chủ</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/product-grid.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🛍️ Cửa hàng</h1>
+            <nav class="nav">
+                <a href="index.html" class="nav-link active">Trang chủ</a>
+                <a href="#" class="nav-link">Danh mục</a>
+                <a href="#" class="nav-link">Liên hệ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="hero">
+                <h2>Khám phá sản phẩm chất lượng</h2>
+                <p>Tìm kiếm những sản phẩm tốt nhất với giá cả hợp lý</p>
+            </section>
+
+            <section class="products-section">
+                <div class="section-header">
+                    <h3>Sản phẩm nổi bật</h3>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-category="all">Tất cả</button>
+                        <button class="filter-btn" data-category="clothing">Thời trang</button>
+                        <button class="filter-btn" data-category="shoes">Giày dép</button>
+                        <button class="filter-btn" data-category="accessories">Phụ kiện</button>
+                    </div>
+                </div>
+
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Đang tải sản phẩm...</p>
+                </div>
+
+                <div id="error" class="error-message" style="display: none;">
+                    <p>❌ Không thể tải danh sách sản phẩm. Vui lòng thử lại sau.</p>
+                </div>
+
+                <div id="products-grid" class="products-grid">
+                    <!-- Sản phẩm sẽ được render ở đây -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Cửa hàng sản phẩm. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/product-list.js"></script>
+</body>
+</html>

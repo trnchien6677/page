@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý sản phẩm - Admin Panel</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🔧 Admin Panel</h1>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Xem trang chủ</a>
+                <a href="#" class="nav-link" id="refresh-data">🔄 Làm mới</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="admin-header">
+                <h2>Quản lý sản phẩm</h2>
+                <p class="warning-text">
+                    ⚠️ <strong>Chú ý:</strong> Trang này chỉ hoạt động trong môi trường phát triển local. 
+                    Không deploy lên GitHub Pages.
+                </p>
+            </div>
+
+            <!-- Add Product Form -->
+            <section class="admin-section">
+                <div class="section-header">
+                    <h3>Thêm sản phẩm mới</h3>
+                    <button class="btn-secondary" id="toggle-form">
+                        <span id="form-toggle-text">Hiện form</span>
+                    </button>
+                </div>
+
+                <div id="product-form" class="product-form" style="display: none;">
+                    <form id="add-product-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="product-name">Tên sản phẩm *</label>
+                                <input type="text" id="product-name" name="name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="product-price">Giá (VNĐ) *</label>
+                                <input type="number" id="product-price" name="price" min="0" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="product-category">Danh mục *</label>
+                                <select id="product-category" name="category" required>
+                                    <option value="">Chọn danh mục</option>
+                                    <option value="clothing">Thời trang</option>
+                                    <option value="shoes">Giày dép</option>
+                                    <option value="accessories">Phụ kiện</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="product-stock">Tình trạng kho</label>
+                                <select id="product-stock" name="inStock">
+                                    <option value="true">Còn hàng</option>
+                                    <option value="false">Hết hàng</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-description">Mô tả sản phẩm *</label>
+                            <textarea id="product-description" name="description" rows="4" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-images">URL ảnh sản phẩm (mỗi dòng một URL)</label>
+                            <textarea id="product-images" name="images" rows="3" 
+                                placeholder="images/products/product-1.jpg&#10;images/products/product-2.jpg"></textarea>
+                            <small>Ảnh đầu tiên sẽ được dùng làm thumbnail</small>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">
+                                <span id="submit-text">➕ Thêm sản phẩm</span>
+                            </button>
+                            <button type="button" class="btn-secondary" id="clear-form">
+                                🗑️ Xóa form
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Products List -->
+            <section class="admin-section">
+                <div class="section-header">
+                    <h3>Danh sách sản phẩm</h3>
+                    <div class="stats">
+                        <span id="products-count">0 sản phẩm</span>
+                    </div>
+                </div>
+
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Đang tải danh sách sản phẩm...</p>
+                </div>
+
+                <div id="error" class="error-message" style="display: none;">
+                    <p>❌ Không thể tải danh sách sản phẩm.</p>
+                </div>
+
+                <div id="products-table" class="products-table">
+                    <!-- Bảng sản phẩm sẽ được render ở đây -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Edit Product Modal -->
+    <div id="edit-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Chỉnh sửa sản phẩm</h3>
+                <button class="modal-close" id="close-modal">&times;</button>
+            </div>
+            
+            <form id="edit-product-form">
+                <input type="hidden" id="edit-product-id">
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="edit-product-name">Tên sản phẩm *</label>
+                        <input type="text" id="edit-product-name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-product-price">Giá (VNĐ) *</label>
+                        <input type="number" id="edit-product-price" name="price" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-product-category">Danh mục *</label>
+                        <select id="edit-product-category" name="category" required>
+                            <option value="clothing">Thời trang</option>
+                            <option value="shoes">Giày dép</option>
+                            <option value="accessories">Phụ kiện</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-product-stock">Tình trạng kho</label>
+                        <select id="edit-product-stock" name="inStock">
+                            <option value="true">Còn hàng</option>
+                            <option value="false">Hết hàng</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-product-description">Mô tả sản phẩm *</label>
+                    <textarea id="edit-product-description" name="description" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-product-images">URL ảnh sản phẩm (mỗi dòng một URL)</label>
+                    <textarea id="edit-product-images" name="images" rows="3"></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">💾 Lưu thay đổi</button>
+                    <button type="button" class="btn-secondary" id="cancel-edit">❌ Hủy</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Xác nhận xóa</h3>
+                <button class="modal-close" id="close-delete-modal">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa sản phẩm này không?</p>
+                <p><strong id="delete-product-name"></strong></p>
+                <p class="warning-text">⚠️ Hành động này không thể hoàn tác!</p>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-danger" id="confirm-delete">🗑️ Xóa</button>
+                <button class="btn-secondary" id="cancel-delete">❌ Hủy</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Admin Panel - Chỉ sử dụng trong môi trường phát triển</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

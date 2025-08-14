@@ -1,0 +1,57 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Áo thun nam basic",
+      "price": 150000,
+      "description": "Áo thun cotton 100%, thoáng mát, phù hợp mặc hàng ngày. Chất liệu mềm mại, không co rút sau khi giặt.",
+      "category": "clothing",
+      "images": [
+        "images/products/ao-thun-1.jpg",
+        "images/products/ao-thun-2.jpg",
+        "images/products/ao-thun-3.jpg"
+      ],
+      "thumbnail": "images/products/ao-thun-1.jpg",
+      "inStock": true,
+      "createdAt": "2024-01-15T10:00:00Z",
+      "updatedAt": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Giày sneaker trắng",
+      "price": 450000,
+      "description": "Giày thể thao trẻ trung, năng động. Đế cao su chống trượt, thiết kế hiện đại phù hợp với mọi phong cách.",
+      "category": "shoes",
+      "images": [
+        "images/products/giay-1.jpg",
+        "images/products/giay-2.jpg",
+        "images/products/giay-3.jpg",
+        "images/products/giay-4.jpg"
+      ],
+      "thumbnail": "images/products/giay-1.jpg",
+      "inStock": true,
+      "createdAt": "2024-01-16T09:30:00Z",
+      "updatedAt": "2024-01-16T09:30:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Túi xách nữ da PU",
+      "price": 280000,
+      "description": "Túi xách nữ chất liệu da PU cao cấp, thiết kế sang trọng. Nhiều ngăn tiện lợi, phù hợp đi làm và dạo phố.",
+      "category": "accessories",
+      "images": [
+        "images/products/tui-1.jpg",
+        "images/products/tui-2.jpg"
+      ],
+      "thumbnail": "images/products/tui-1.jpg",
+      "inStock": false,
+      "createdAt": "2024-01-17T14:15:00Z",
+      "updatedAt": "2024-01-17T14:15:00Z"
+    }
+  ],
+  "metadata": {
+    "lastUpdated": "2024-01-17T14:15:00Z",
+    "totalProducts": 3,
+    "nextId": 4
+  }
+}
